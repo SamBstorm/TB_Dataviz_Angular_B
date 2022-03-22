@@ -1,0 +1,44 @@
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <!-- div>label+input -->
+    <div>
+        <label for="nom">Nom :</label>
+        <input type="text" id="nom" formControlName="name">
+        <div *ngIf="productForm.controls?.['name']?.errors && productForm.controls?.['name']?.touched"
+        style="border : 1px red solid">
+            <p *ngIf="productForm.controls?.['name']?.errors?.['required']">Le champ est obligatoire.</p>
+            <p *ngIf="productForm.controls?.['name']?.errors?.['maxlength']">Maximum 50 caractères.</p>
+        </div>
+    </div>
+    <div>
+        <label for="desc">Description :</label>
+        <textarea formControlName="description"
+        id="desc"></textarea>
+        <div *ngIf="productForm.controls?.['description']?.errors && productForm.controls?.['description']?.touched"
+        style="border : 1px red solid">
+            <p *ngIf="productForm.controls?.['description']?.errors?.['maxlength']">Maximum 500 caractères.</p>
+        </div>
+    </div>
+    <div>
+        <label for="price">Prix :</label>
+        <input type="number" id="price" formControlName="price">
+        <div *ngIf="productForm.controls?.['price']?.errors && productForm.controls?.['price']?.touched"
+        style="border : 1px red solid">
+            <p *ngIf="productForm.controls?.['price']?.errors?.['required']">Le champ est obligatoire.</p>
+            <p *ngIf="productForm.controls?.['price']?.errors?.['min']">Le prix doit être de minimum 0€.</p>
+        </div>
+    </div>
+    <div>
+        <label for="cat">Catégorie : </label>
+        <select id="cat" formControlName="categoryId">
+            <option value="" [selected]="true">Veuillez sélectionner une catégorie</option>
+            <option [value]="cat.id" *ngFor="let cat of optionsCat">
+                {{cat.name}}
+            </option>
+        </select>
+        <div *ngIf="productForm.controls?.['categoryId']?.errors && productForm.controls?.['categoryId']?.touched"
+        style="border : 1px red solid">
+            <p *ngIf="productForm.controls?.['categoryId']?.errors?.['required']">Le champ est obligatoire.</p>
+        </div>
+    </div>
+    <input type="submit" value="Enregister">
+</form>
