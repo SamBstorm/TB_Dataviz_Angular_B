@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ICategory } from 'src/app/models/icategory';
+import { IProduct } from 'src/app/models/iproduct';
+import { DatavizApiProductService } from 'src/app/services/dataviz-api-product.service';
 
 @Component({
   selector: 'app-create-product',
@@ -15,7 +17,10 @@ export class CreateProductComponent implements OnInit, OnDestroy {
     {id : 2 , name : 'Viande'},
     {id : 3 , name : 'Boisson'}
   ];
-  constructor(private _fb : FormBuilder) { }
+  constructor(
+    private _fb : FormBuilder,
+    private _apiProduct : DatavizApiProductService
+    ) { }
 
   ngOnDestroy(): void {
     console.log('Adieuuuuuu!');
@@ -34,6 +39,18 @@ export class CreateProductComponent implements OnInit, OnDestroy {
 
   public onSubmit(){
     if(!this.productForm.valid) return;
-    console.dir(this.productForm);
+    //console.dir(this.productForm);
+    let result : IProduct ={
+      id : 0,
+      name : this.productForm.value.name,
+      description : this.productForm.value.description,
+      price : this.productForm.value.price,
+      categoryId : this.productForm.value.categoryId
+    };
+    this._apiProduct.post(result).subscribe(
+      {
+        next : console.dir
+      }
+    )
   }
 }
