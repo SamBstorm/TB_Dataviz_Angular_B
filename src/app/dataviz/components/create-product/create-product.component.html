@@ -40,5 +40,5 @@
             <p *ngIf="productForm.controls?.['categoryId']?.errors?.['required']">Le champ est obligatoire.</p>
         </div>
     </div>
-    <input type="submit" value="Enregister">
+    <input type="submit" value="Enregister" [disabled]="!productForm.valid">
 </form>

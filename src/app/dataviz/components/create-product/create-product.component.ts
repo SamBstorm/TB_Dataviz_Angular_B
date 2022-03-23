@@ -33,7 +33,7 @@ export class CreateProductComponent implements OnInit, OnDestroy {
   }
 
   public onSubmit(){
-    //if(!this.productForm.valid) return;
+    if(!this.productForm.valid) return;
     console.dir(this.productForm);
   }
 }

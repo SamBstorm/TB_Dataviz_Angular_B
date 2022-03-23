@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { DatavizRoutingModule } from './dataviz-routing.module';
 import { CreateProductComponent } from './components/create-product/create-product.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DatavizApiService } from '../services/dataviz-api.service';
 
 
 @NgModule({
